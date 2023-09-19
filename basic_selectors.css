@@ -1,0 +1,17 @@
+h1,h2, h3{
+    text-transform: uppercase;
+}
+
+a{
+    color: green;
+}
+.top{
+    background-color: rgb(227, 132, 9);
+}
+em{
+    background-color: rgb(145, 145, 225);
+}
+#the_most_important{
+    background-color: rgb(227, 132, 9);
+    text-transform: capitalize;
+}
