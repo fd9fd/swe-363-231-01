@@ -9,8 +9,9 @@
         <meta name="description" content="This is a business web site that introduce our shop which 
         a tea shop. it provides different types of tea and has some ineresting information about tea plant. ">
         <title>Hire Me</title>
-        <link rel="stylesheet" href="basic_selectors.css">
+        <link rel="stylesheet" href="advanced_selectors.css">
         <!--<link rel="stylesheet" href="dark_theme.css">-->
+        <!--<link rel="stylesheet" href="basic_selectors.css">-->
     </head>
     <body>
         <header>
@@ -18,7 +19,7 @@
         </header>
         
         <p>Please fill out this form and then click on submit botton</p>
-        <form method= "post" action="thankyou.html" autocomplete="on">
+        <form method= "get" action="thankyou.html" autocomplete="on">
             <p>
                 <strong>Select your gender</strong><br>
                 <label>Male 
@@ -89,15 +90,19 @@
             </p>
 
             <p>
-                <label>Feel free to add, or to tell us anything about you</label><br>
-                <textarea name="comments" cols="40" rows="6">Enter comments here.</textarea>
+                <!--
+                    <label>Feel free to add, or to tell us anything about you</label><br>
+                    <textarea name="message" cols="40" rows="6">Enter comments here.</textarea>
+                -->
+                <label>Feel free to add, or to tell us anything about you:<br/><input type="text" name="message"></label>
             </p>
 
             <p>
                 <!--<input type="submit" value="Submit">-->
-                <a href="thankyou.html">
+                <!--<a href="thankyou.html">
                     <button type="button">Submit</button>
-                </a>
+                </a>-->
+                <input type="submit" value="Submit">
                 <input type="reset" value="Clear">
             </p>
         </form>
