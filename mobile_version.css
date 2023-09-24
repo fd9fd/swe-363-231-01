@@ -1,0 +1,73 @@
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,400i,700&display=swap');
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+h1, h2, h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+:root {
+    --primary-color: #008080; /* Teal */
+    --secondary-color: #FFD700; /* Gold */
+    --background-color: #FFFFFF; /* White */
+    --text-color: #333333; /* Dark Gray */
+}
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+header {
+    background-color: var(--primary-color);
+    color: #FFFFFF; 
+    padding: 20px;
+}
+.nav-menu {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+.nav-item {
+    margin: 0 10px;
+}
+.nav-link {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+p {
+    line-height: 1.5;
+}
+.button {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.button:hover {
+    background-color: var(--secondary-color);
+}
+.tea-menu {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    background-color: #F8F8F8;
+    padding: 20px;
+}
+
+.tea-item {
+    margin-bottom: 20px;
+}
+footer {
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+    padding: 20px;
+    text-align: center;
+}
