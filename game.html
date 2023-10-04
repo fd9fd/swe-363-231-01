@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collect the Coins</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        #game-container {
+            width: 400px;
+            height: 400px;
+            margin: auto;
+            position: relative;
+            background-color: #00aaff;
+        }
+
+        #character {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            background-color: #ffcc00;
+            border-radius: 50%;
+        }
+
+        .coin {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            background-color: gold;
+            border-radius: 50%;
+        }
+
+        .rock {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            background-color: #444;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+<div id="game-container">
+    <div id="character"></div>
+</div>
+
+<script>
+    const character = document.getElementById("character");
+    const gameContainer = document.getElementById("game-container");
+    const coins = [];
+    const rocks = [];
+    let score = 0;
+
+    // Create the character
+    let characterX = 180;
+    let characterY = 180;
+
+    // Create coins and rocks
+    for (let i = 0; i < 10; i++) {
+        createCoin();
+        createRock();
+    }
+
+    // Add event listeners for arrow key controls
+    document.addEventListener("keydown", moveCharacter);
+
+    // Function to create a coin
+    function createCoin() {
+        const coin = document.createElement("div");
+        coin.classList.add("coin");
+        coin.style.left = Math.random() * 360 + "px";
+        coin.style.top = Math.random() * 360 + "px";
+        gameContainer.appendChild(coin);
+        coins.push(coin);
+    }
+
+    // Function to create a rock
+    function createRock() {
+        const rock = document.createElement("div");
+        rock.classList.add("rock");
+        rock.style.left = Math.random() * 360 + "px";
+        rock.style.top = Math.random() * 360 + "px";
+        gameContainer.appendChild(rock);
+        rocks.push(rock);
+    }
+
+    // Function to move the character
+    function moveCharacter(event) {
+        switch (event.key) {
+            case "ArrowUp":
+                characterY -= 20;
+                break;
+            case "ArrowDown":
+                characterY += 20;
+                break;
+            case "ArrowLeft":
+                characterX -= 20;
+                break;
+            case "ArrowRight":
+                characterX += 20;
+                break;
+        }
+
+        // Update character position
+        character.style.left = characterX + "px";
+        character.style.top = characterY + "px";
+
+        // Check for collisions with coins
+        for (let i = 0; i < coins.length; i++) {
+            if (isCollision(character, coins[i])) {
+                coins[i].remove();
+                coins.splice(i, 1);
+                score++;
+                createCoin();
+            }
+        }
+
+        // Check for collisions with rocks
+        for (let i = 0; i < rocks.length; i++) {
+            if (isCollision(character, rocks[i])) {
+                alert("Game Over! Your Score: " + score);
+                location.reload(); // Reload the game
+            }
+        }
+    }
+
+    // Function to check for collisions between two elements
+    function isCollision(element1, element2) {
+        const rect1 = element1.getBoundingClientRect();
+        const rect2 = element2.getBoundingClientRect();
+        return (
+            rect1.left < rect2.left + rect2.width &&
+            rect1.left + rect1.width > rect2.left &&
+            rect1.top < rect2.top + rect2.height &&
+            rect1.top + rect1.height > rect2.top
+        );
+    }
+</script>
+</body>
+</html>
+
+<!--the player controls a character using arrow keys to collect coins and avoid rocks. 
+    The character moves around the game container, and when it collects a coin, 
+    the player's score increases. If the character collides with a rock, 
+    the game ends, and the player's score is displayed.-->
