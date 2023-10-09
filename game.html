@@ -42,11 +42,25 @@
             background-color: #444;
             border-radius: 50%;
         }
+
+        #instructions {
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
 <div id="game-container">
     <div id="character"></div>
+</div>
+
+<div id="instructions">
+    <h2>Instructions</h2>
+    <p>Use the Arrow keys to control the character and collect the coins while avoiding the rocks.</p>
+    <p>Your goal is to collect as many coins as possible before hitting a rock.</p>
+    <p>If your character collides with a coin, it will disappear, and your score will increase.</p>
+    <p>If your character collides with a rock, the game ends, and your final score will be displayed.</p>
+    <p>Good luck!</p>
 </div>
 
 <script>
