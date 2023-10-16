@@ -99,6 +99,37 @@
                 <label>Feel free to add, or to tell us anything about you:<br/><input type="text" name="message"></label>
             </p>
 
+            <canvas id="signatureCanvas" width="400" height="200"></canvas>
+            <button id="clearSignature">Clear Signature</button>
+            <script>
+                const signatureCanvas = document.getElementById('signatureCanvas');
+                const clearSignatureButton = document.getElementById('clearSignature');
+        
+                const context = signatureCanvas.getContext('2d');
+                let isDrawing = false;
+        
+                // Event listeners
+                signatureCanvas.addEventListener('mousedown', (e) => {
+                    isDrawing = true;
+                    context.beginPath();
+                    context.moveTo(e.clientX - signatureCanvas.getBoundingClientRect().left, e.clientY - signatureCanvas.getBoundingClientRect().top);
+                });
+        
+                signatureCanvas.addEventListener('mousemove', (e) => {
+                    if (isDrawing) {
+                        context.lineTo(e.clientX - signatureCanvas.getBoundingClientRect().left, e.clientY - signatureCanvas.getBoundingClientRect().top);
+                        context.stroke();
+                    }
+                });
+        
+                signatureCanvas.addEventListener('mouseup', () => {
+                    isDrawing = false;
+                });
+        
+                clearSignatureButton.addEventListener('click', () => {
+                    context.clearRect(0, 0, signatureCanvas.width, signatureCanvas.height);
+                });
+            </script>
             <p>
                 <!--<input type="submit" value="Submit">-->
                 <!--<a href="thankyou.html">
