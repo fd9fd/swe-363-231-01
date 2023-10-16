@@ -22,6 +22,8 @@
             img {text-align: center;}
             p {text-align: center;}
             p{font-family: 'Cairo', 'El Messiri';}
+
+    
         </style>
     </head>
 
@@ -34,6 +36,74 @@
         <figure style="text-align: center;">
             <img src="assets/img3.webp" width="540" height="500" alt="img">
         </figure>
+
+        <div id="screensaver">
+            <canvas id="screensaverCanvas" width="200" height="200"></canvas>
+        </div>
+    
+        <script>
+            const screensaverCanvas = document.getElementById('screensaverCanvas');
+            const screensaverContext = screensaverCanvas.getContext('2d');
+            let lastInteractionTime = Date.now();
+    
+            // Function to draw a rotating 3D cube
+            function drawCube(time) {
+                screensaverContext.clearRect(0, 0, screensaverCanvas.width, screensaverCanvas.height);
+    
+                const centerX = screensaverCanvas.width / 2;
+                const centerY = screensaverCanvas.height / 2;
+                const size = 100;
+                const angle = (time / 1000) * Math.PI;  
+    
+                screensaverContext.strokeStyle = 'balck';
+                screensaverContext.strokeRect(centerX - size / 2, centerY - size / 2, size, size);
+    
+                screensaverContext.save();
+                screensaverContext.translate(centerX, centerY);
+                screensaverContext.rotate(angle);
+                screensaverContext.strokeRect(-size / 2, -size / 2, size, size);
+                screensaverContext.restore();
+            }
+    
+            // Function to check for user interaction
+            function checkInteraction() {
+                const currentTime = Date.now();
+                if (currentTime - lastInteractionTime >= 60000) { // 1 minute = 60,000 milliseconds
+                    screensaver.style.display = 'block';
+                    animateScreensaver();
+                } else {
+                    screensaver.style.display = 'none';
+                }
+            }
+    
+            function animateScreensaver() {
+                let startTime = Date.now();
+                function animate() {
+                    const currentTime = Date.now();
+                    const elapsed = currentTime - startTime;
+                    drawCube(elapsed);
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            }
+    
+            // Event listeners to track user interactions
+            document.addEventListener('mousemove', () => {
+                lastInteractionTime = Date.now();
+                screensaver.style.display = 'none';
+            });
+    
+            document.addEventListener('keydown', () => {
+                lastInteractionTime = Date.now();
+                screensaver.style.display = 'none';
+            });
+    
+            // Initial check for interaction
+            checkInteraction();
+    
+            // Periodically check for user interaction
+            setInterval(checkInteraction, 1000); 
+        </script>
 
         
         <p>في FD Tea Shop، سوف تستمتع بالشاي الأسود،
@@ -58,5 +128,6 @@
                 قم بالتعين من خلال <a href="hireme.html">عيني</a><br>
             </address>
         </footer>
+
     </body>
 </html>
