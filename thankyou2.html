@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Fahd">
+    <meta name="keywords" content="web page, design, HTML5, tutorial, personal, tea shop, teaShop, tea">
+    <meta name="description" content="This is a business web site that introduces our shop, a tea shop. It provides different types of tea and has some interesting information about the tea plant.">
+    <title>Thank You</title>
+    <link rel="stylesheet" href="desktop.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>Thank You</h1>
+            <p><strong>We will contact you soon</strong></p>
+            <p>Random Advice Generator</p>
+            <button id="fetchAdvice" @click="fetchAdvice">Get Advice</button>
+            <div id="adviceContainer">{{ advice }}</div>
+        </header>
+
+        <footer>
+            <h6>&copy; 2023-2024 by Fahd &amp; Associates, Inc. All Rights Reserved.</h6>
+            <address>
+                Visit our <a href="teashop.html">Home Page</a><br>
+                Visit <a href="detailspage.html">Camellia sinensis tea plant</a> for more details<br>
+                Contact us through our <a href="contactus.html">Contact Page</a><br>
+                Get hired through <a href="hireme.html">Hire Me Page</a><br>
+            </address>
+        </footer>
+    </div>
+
+    <script src="script2.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                advice: '',
+            },
+            methods: {
+                fetchAdvice() {
+                    fetch('https://api.adviceslip.com/advice')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.advice = data.slip.advice;
+                        })
+                        .catch(error => console.error(error));
+                }
+            }
+        });
+    </script>
+</body>
+</html>
