@@ -92,6 +92,43 @@
         </p>
         
         <br>
+
+        <div id="articleList">
+            <!-- Articles will be displayed here -->
+        </div>
+    
+        <script>
+            class Article {
+                constructor(title, content, author) {
+                    this.title = title;
+                    this.content = content;
+                    this.author = author;
+                }
+    
+                render() {
+                    const articleElement = document.createElement("div");
+                    articleElement.className = "article";
+                    articleElement.innerHTML = `
+                        <h2>${this.title}</h2>
+                        <p>${this.content}</p>
+                        <p>Author: ${this.author}</p>
+                    `;
+                    return articleElement;
+                }
+            }
+
+            const articles = [
+                new Article("Article 1", "This is the content of article 1.", "John Doe"),
+                new Article("Article 2", "This is the content of article 2.", "Jane Smith"),
+                new Article("Article 3", "This is the content of article 3.", "Bob Johnson")
+            ];
+    
+            const articleListContainer = document.getElementById("articleList");
+            articles.forEach(article => {
+                const articleElement = article.render();
+                articleListContainer.appendChild(articleElement);
+            });
+        </script>
         
         <!--
             <table border="1" style="width:80%">
