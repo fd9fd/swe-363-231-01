@@ -105,7 +105,7 @@
         }
     }
 
-    function checkForWin() {
+    /*function checkForWin() {
         for (const pattern of winningPatterns) {
             const [a, b, c] = pattern;
             if (gameModel[a] !== "" && gameModel[a] === gameModel[b] && gameModel[a] === gameModel[c]) {
@@ -126,6 +126,93 @@
             cell.style.backgroundColor = "beige";
         });
     }
+    */
+
+
+    // 1. Using Function Expressions
+const checkForWin = () => {
+    for (const pattern of winningPatterns) {
+        const [a, b, c] = pattern;
+        if (gameModel[a] !== "" && gameModel[a] === gameModel[b] && gameModel[a] === gameModel[c]) {
+            return true;
+        }
+    }
+    return false;
+};
+
+const resetGame = () => {
+    gameModel = ["", "", "", "", "", "", "", "", ""];
+    turn = "X";
+    gameOver = false;
+    document.querySelector("#turn span").textContent = "X";
+    document.querySelector("#turn").textContent = "Now it's X's turn";
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.style.backgroundColor = "beige";
+    });
+};
+
+// 2. Breaking Down Complex Operations
+const updateTurnText = () => {
+    const turnElement = document.querySelector("#turn span");
+    turnElement.textContent = turn;
+    document.querySelector("#turn").textContent = `Now it's ${turn}'s turn`;
+};
+
+const clearCells = () => {
+    cells.forEach(cell => {
+        cell.textContent = "";
+        cell.style.backgroundColor = "beige";
+    });
+};
+
+// 3. Using Arrow Functions and IIFE
+(() => {
+    const winningPatterns = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6]
+    ];
+
+    let gameModel = ["", "", "", "", "", "", "", "", ""];
+    let turn = "X";
+    let gameOver = false;
+
+    const cells = document.querySelectorAll(".cell");
+
+    cells.forEach(cell => {
+        cell.addEventListener("click", handleCellClick);
+    });
+
+    function handleCellClick(event) {
+        const cell = event.target;
+        const index = cell.getAttribute("data-index");
+
+        if (gameModel[index] === "" && !gameOver) {
+            gameModel[index] = turn;
+            cell.textContent = turn;
+
+            if (checkForWin()) {
+                alert(`${turn} wins!`);
+                gameOver = true;
+            } else if (gameModel.every(value => value !== "")) {
+                alert("It's a tie!");
+                gameOver = true;
+            } else {
+                turn = turn === "X" ? "O" : "X";
+                updateTurnText();
+            }
+        }
+    }
+})();
+
+
+
 </script>
 </body>
 </html>
